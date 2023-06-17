@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.3.6/axios.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/qs/6.11.1/qs.min.js"></script>
+</head>
+<body>
+    <div>Hello</div>
+    <input type="file" multiple id="fileInput">
+    <script>
+        // url param 方式
+        // async function urlParam() {
+        //     const res = await axios.get('/user/10')
+        //     console.log(res);
+        // }
+        // urlParam();
+        
+        // query 方式
+        // async function query() {
+        //     const res  = await axios.get('/user/find',{
+        //         params:{
+        //             name:'宇文所拓',
+        //             age:26
+        //         }
+        //     });
+        //     console.log(res);
+        // }
+        // query();
+
+        // form urlencoded 方式
+        // async function formUrlEncoded() {
+        //     const res = await axios.post('/user',Qs.stringify({
+        //         name:'哈哈',
+        //         age:11
+        //     }),{
+        //         headers:{'content-type':'application/x-www-form-urlencoded'}
+        //     })
+        //     console.log(res);
+        // }
+        // formUrlEncoded();
+
+        //json 方式
+        // async function json() {
+        //     const res = await axios.post('/user', {
+        //         name: '光',
+        //         age: 20
+        //     });
+        //     console.log(res);     
+        // }
+        // json();
+
+        // 传递文件
+        async function formData() {
+            const fileInput = document.getElementById('fileInput');
+
+            const data = new FormData();
+            data.set('name','京东大鼓');
+            data.set('age',123);
+            data.set('file1',fileInput.files[0]);
+            data.set('file2',fileInput.files[1]);
+
+            const res = await axios.post('/user/file',data,{
+                headers:{'content-type':'multipart/form-data'}
+            });
+            console.log(res);
+        }
+        fileInput.onchange = formData;
+    </script>
+</body>
+</html>
